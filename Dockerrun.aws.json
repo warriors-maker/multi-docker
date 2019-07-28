@@ -1,0 +1,36 @@
+{
+ "AWSEBDockerrunVersion": 2,
+ "containerDefinitions": [
+  {
+   "name": "client",
+   "image": "steviewu/multi-client",
+   "hostname": "client",
+   "essential": false
+  },
+  {
+   "name": "server",
+   "image": "steviewu/multi-server",
+   "hostname": "api",
+   "essential": false
+  },
+  {
+   "name": "worker",
+   "image": "steviewu/multi-worker",
+   "hostname": "client",
+   "essential": false
+  },
+  {
+   "name": "nginx",
+   "image": "steviewu/multi-nginx",
+   "hostname": "nginx",
+   "essential": true,
+   "portMappings": [
+    {
+     "hostPort":80,
+     "containerPort": 80
+    }
+   ],
+   "links": ["client", "server"]
+  }
+ ]
+}
